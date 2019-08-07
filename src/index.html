@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>let exports = {}; </script>
+    <script src='pairingtimer.js'></script>
+    <script>
+    let timer = new PairingTimer(15000);
+
+    let intervalNumber = 0;
+
+    function startInterval() {
+        intervalNumber = setInterval(function() {
+            console.log("xxx", timer)
+            if (!timer.isStarted()) {
+                if (timer.isTimeForABreak()) {
+                    alert("Make a Break!")
+                } else {
+                    alert("Time for a change!")
+                }
+                clearInterval(intervalNumber)
+            }
+        }, 500)
+    };
+
+    function onStartClicked() {
+        timer.start()
+        startInterval()
+        console.log("started");
+    }
+    function onStopClicked() {
+        timer.stop()
+        console.log("stopped");
+        clearInterval(intervalNumber);
+    }
+
+    startInterval()
+    </script>
+</head>
+<body>
+    <h1>Fancy Pairing Timer</h1>
+    <button onclick="onStartClicked()">Start Timer</button>
+    <button onclick="onStopClicked()">End Timer</button>
+    <p id="Running"></p>
+</body>
+</html>
